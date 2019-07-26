@@ -1,8 +1,12 @@
 {
-  "generalSettings": {
-    "shouldScanRepo": true
+  "scanSettings": {
+    "configMode": "AUTO",
+    "configExternalURL": ""
   },
   "checkRunSettings": {
     "vulnerableCheckRunConclusionLevel": "failure"
+  },
+  "issueSettings": {
+    "minSeverityLevel": "LOW"
   }
 }
