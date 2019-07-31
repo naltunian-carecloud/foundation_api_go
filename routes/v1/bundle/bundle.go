@@ -1,10 +1,10 @@
 package bundle
 
 import (
-	"log"
 	"encoding/json"
 	"github.com/CareCloud/gofhir/models"
 	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 )
 
@@ -20,7 +20,7 @@ type BundleMappingData struct {
 func initialize(w http.ResponseWriter, r *http.Request) {
 	var (
 		bundleMappingData BundleMappingData
-		err error
+		err               error
 	)
 	err = json.NewDecoder(r.Body).Decode(&bundleMappingData)
 	if err != nil {

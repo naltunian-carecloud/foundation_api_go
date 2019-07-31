@@ -20,7 +20,6 @@ type server struct {
 }
 
 func main() {
-
 	s := server{
 		router: mux.NewRouter(),
 	}
