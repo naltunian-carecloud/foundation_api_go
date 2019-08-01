@@ -1,0 +1,85 @@
+version: 2.1
+orbs:
+  gcp-gcr: carecloud/gcp-gcr@0.0.1
+  gcp-kms: carecloud/gcp-kms@0.0.1
+  gcp-gke: carecloud/gcp-gke@0.0.1
+  github: carecloud/github@0.0.1
+  docker: carecloud/docker@0.0.1
+  node: carecloud/node@0.0.2
+
+workflows:
+  build-dev-image-and-push:
+    jobs:
+      - gcp-gke/create-kube-config:
+          context: dev
+          filters:
+            branches:
+              only: /dev/
+      - gcp-kms/get-and-decrypt:
+          context: dev
+          ciphertext-file: hub.enc
+          plaintext-file: hub
+          bucket: GCS_PIPELINE_BUCKET
+          object-path: hub.enc
+          filters:
+            branches:
+              only: /dev/
+      - gcp-gcr/build-and-push-image:
+          context: dev
+          image: foundation
+          filters:
+            branches:
+              only: /dev/
+      - github/create-k8-patch:
+          context: dev
+          github-repo: foundation
+          k8-container-name: foundation
+          requires:
+            - gcp-kms/get-and-decrypt
+            - gcp-gke/create-kube-config
+            - gcp-gcr/build-and-push-image
+          filters:
+            branches:
+              only: /dev/
+  build-qa-image-and-push:
+    jobs:
+      - gcp-gke/create-kube-config:
+          context: qa
+          filters:
+            tags:
+              only: /\d\d\.\d\d\.\d\d\.\d*/
+            branches:
+              ignore: /.*/
+      - gcp-kms/get-and-decrypt:
+          context: qa
+          ciphertext-file: hub.enc
+          plaintext-file: hub
+          bucket: GCS_PIPELINE_BUCKET
+          object-path: hub.enc
+          filters:
+            tags:
+              only: /\d\d\.\d\d\.\d\d\.\d*/
+            branches:
+              ignore: /.*/
+      - gcp-gcr/build-and-push-image:
+          context: qa
+          image: foundation
+          tag: CIRCLE_TAG
+          filters:
+            tags:
+              only: /\d\d\.\d\d\.\d\d\.\d*/
+            branches:
+              ignore: /.*/
+      - github/create-k8-patch:
+          context: qa
+          github-repo: foundation
+          k8-container-name: foundation
+          requires:
+            - gcp-kms/get-and-decrypt
+            - gcp-gke/create-kube-config
+            - gcp-gcr/build-and-push-image
+          filters:
+            tags:
+              only: /\d\d\.\d\d\.\d\d\.\d*/
+            branches:
+              ignore: /.*/
