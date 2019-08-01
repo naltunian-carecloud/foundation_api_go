@@ -27,6 +27,7 @@ workflows:
       - gcp-gcr/build-and-push-image:
           context: dev
           image: foundation
+          build-token-arg: GH_TOKEN
           filters:
             branches:
               only: /dev/
@@ -64,6 +65,7 @@ workflows:
       - gcp-gcr/build-and-push-image:
           context: qa
           image: foundation
+          build-token-arg: GH_TOKEN
           tag: CIRCLE_TAG
           filters:
             tags:
