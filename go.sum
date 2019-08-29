@@ -1,3 +1,7 @@
+github.com/CareCloud/gofhir v0.0.0-20190524230743-4733fd0a1c55 h1:SWJR19gXRd/SfQQhXVTQwGPwPn6bsrec3eotjmuumf4=
+github.com/CareCloud/gofhir v0.0.0-20190524230743-4733fd0a1c55/go.mod h1:BKVUqJ8qAZstcjLtUCHZB9o0RMBkjBl1X/HkAjXMKtI=
+github.com/CareCloud/gofhir v0.0.0-20190829161710-258781e8bf3c h1:eYdbIxgMFoaeJOUsxF5uE3CHQWhBHoP1Qo8rgeLNVw0=
+github.com/CareCloud/gofhir v0.0.0-20190829161710-258781e8bf3c/go.mod h1:GI7YLn9b3ZIlDNNyHb0E0sDz0UTTzH3pVJD4q17u7RE=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/gorilla/mux v1.7.2 h1:zoNxOV7WjqXptQOVngLmcSQgXmgk4NMz1HibBchjl/I=

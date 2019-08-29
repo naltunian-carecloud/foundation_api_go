@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/CareCloud/foundation_api_go/middleware"
+	"github.com/CareCloud/foundation_api_go/routes/v1/basic"
 	"github.com/CareCloud/foundation_api_go/routes/v1/bundle"
 	"github.com/gorilla/mux"
 	_ "github.com/joho/godotenv/autoload"
@@ -61,4 +62,5 @@ func (s *server) routes() {
 
 	v1 := s.router.PathPrefix("/api/v1").Subrouter()
 	bundle.Routes(v1)
+	basic.Routes(v1)
 }
